@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Proveedor</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6">
+            <!-- Card -->
+            <div class="card shadow">
+                <!-- Titulo -->
+                <h1 class="card-header text-center text-primary" th:text="${titulo}"></h1>
+
+                <!-- Formulario -->
+                <div class="card-body">
+                    <form th:action="@{/nuevoProveedor}" th:object="${MProveedor}" th:method="POST">
+
+                        <div class="form-group">
+                            <label>Nombre:</label>
+                            <input type="text" name="nombre" th:field="*{nombre}" class="form-control" placeholder="Ingrese su nombre">
+                            <div th:if="${#fields.hasErrors('nombre')}" class="text-danger" th:errors="*{nombre}"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Telefono:</label>
+                            <input type="number" name="telefono" th:field="*{telefono}" class="form-control" placeholder="Ingrese numero telefonico">
+                            <div th:if="${#fields.hasErrors('nombre')}" class="text-danger" th:errors="*{telefono}"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Dirección:</label>
+                            <input type="text" name="direccion" th:field="*{direccion}" class="form-control" placeholder="Ingrese dirección">
+                            <div th:if="${#fields.hasErrors('direccion')}" class="text-danger" th:errors="*{direccion}"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input type="text" name="email" th:field="*{email}" class="form-control" placeholder="Ingrese email" step="any">
+                            <div th:if="${#fields.hasErrors('email')}" class="text-danger" th:errors="*{email}"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Sitio Web:</label>
+                            <input type="text" name="sitioWeb" th:field="*{sitioWeb}" class="form-control" placeholder="Ingrese stock">
+                            <div th:if="${#fields.hasErrors('sitioWeb')}" class="text-danger" th:errors="*{sitioWeb}"></div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Estado:</label>
+                            <select name="estado" th:field="*{estado}" class="form-control">
+                                <option value="" selected>Seleccione una opción</option>
+                                <option value="1" th:selected="${estado == '1'}">Activo</option>
+                                <option value="2" th:selected="${estado == '2'}">Inactivo</option>
+                                <option value="3" th:selected="${estado == '3'}">Dado de baja</option>
+                            </select>
+                            <div th:if="${#fields.hasErrors('estado')}" class="text-danger" th:errors="*{estado}"></div>
+                        </div>
+
+
+                        <!-- Botonera-->
+                        <div class="d-flex justify-content-center mt-3">
+                            <button type="submit" class="btn btn-success btn-sm" style="margin-right: 20px;">Guardar</button>
+                            <a th:href="@{/listado}" class="btn btn-danger btn-sm">Cancelar</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

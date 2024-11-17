@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Listado</title>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+<!-- Container Proveedor -->
+<div class="container">
+    <!-- Título -->
+    <h1 class="text-center text-primary my-4" th:text="${tituloProveedores}"></h1>
+
+    <!-- Tabla de Proveedor -->
+    <table class="table table-bordered table-hover text-center">
+        <thead class="bg-primary text-white">
+        <tr>
+            <th scope="col" class="w-auto">Id Proveedor</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Email</th>
+            <th scope="col">Sitio Web</th>
+            <th scope="col">Estado</th>
+            <th scope="col" class="w-auto">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="proveedor : ${MProveedores}">
+            <td th:text="${proveedor.idProveedor}"></td>
+            <td th:text="${proveedor.nombre}"></td>
+            <td th:text="${proveedor.telefono}"></td>
+            <td th:text="${proveedor.direccion}"></td>
+            <td th:text="${proveedor.email}"></td>
+            <td th:text="${proveedor.sitioWeb}"></td>
+            <!--<td th:text="${proveedor.estado}"></td>-->
+            <td>
+            <span th:switch="${proveedor.estado}">
+                <span th:case="1">Activo</span>
+                <span th:case="2">Inactivo</span>
+                <span th:case="3">Dado de Baja</span>
+                <span th:case="*">Sin información</span>
+            </span>
+            </td>
+            <td class="text-center">
+                <a class="btn btn-danger btn-sm"
+                   th:href="@{/eliminarProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"><i
+                        class="bi bi-trash3"></i></a>
+                <a class="btn btn-info btn-sm mr-2"
+                   th:href="@{/editarProveedor/{idProveedor}(idProveedor=${proveedor.idProveedor})}"><i
+                        class="bi bi-pen"></i></a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Botón Agregar Proveedor -->
+    <div class="row mb-3">
+        <div class="col text-center">
+            <a class="btn btn-success btn-sm" th:href="@{/formNuevoProveedor}">Agregar Proveedor</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
